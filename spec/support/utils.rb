@@ -36,4 +36,22 @@ RSpec.shared_context 'should_serialize' do
       is_asserted_by{ subject == {foo: 'abc', baz: 'hijk'} }
     end
   end
+
+  context 'when specify an attribute and a belongs_to' do
+    let(:klass) do
+      superclass = described_class
+      Class.new(superclass) do
+        attributes :foo
+
+        belongs_to_class = Class.new(superclass) do
+          attributes :neko
+        end
+        belongs_to :hoge, belongs_to_class
+      end
+    end
+
+    it  do
+      is_asserted_by{ subject == {foo: 'abc', hoge: {neko: 'nyan'}} }
+    end
+  end
 end
