@@ -24,4 +24,16 @@ RSpec.shared_context 'should_serialize' do
       is_asserted_by{ subject == {bar: 'defg'} }
     end
   end
+
+  context 'when specify 2 attributes' do
+    let(:klass) do
+      Class.new(described_class) do
+        attributes :foo, :baz
+      end
+    end
+
+    it  do
+      is_asserted_by{ subject == {foo: 'abc', baz: 'hijk'} }
+    end
+  end
 end
