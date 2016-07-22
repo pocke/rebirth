@@ -15,6 +15,10 @@ module Rebirth
       def attributes(*args)
         self.table_attributes.concat(args)
       end
+
+      def attribute(arg)
+        self.table_attributes.push(arg)
+      end
     end
 
 
