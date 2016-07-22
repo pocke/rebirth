@@ -16,8 +16,12 @@ module Rebirth
         self.table_attributes.concat(args)
       end
 
-      def attribute(arg)
-        self.table_attributes.push(arg)
+      def attribute(key)
+        self.table_attributes.push(key)
+      end
+
+      def belongs_to(key, klass)
+        self.table_belongs_to[key] = klass
       end
     end
 
@@ -31,6 +35,9 @@ module Rebirth
       hash = {}
       self.class.table_attributes.each do |key|
         hash[key] = __get_value(key)
+      end
+      self.class.table_belongs_to.each do |key, klass|
+        hash[key] = klass.new(__get_value(key)).to_hash
       end
 
       hash

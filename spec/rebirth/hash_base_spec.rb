@@ -6,6 +6,10 @@ describe Rebirth::HashBase do
       foo: 'abc',
       bar: 'defg',
       baz: 'hijk',
+      hoge: {
+        neko: 'nyan',
+        inu: 'wan',
+      },
     }}
     subject{klass.new(object).to_hash}
 
