@@ -1,14 +1,35 @@
 module Rebirth
-  attr_reader :object
+  class Base
+    attr_reader :object
 
-  extend ActiveSupport::Concern
+    class_attribute :table_attributes, :table_has_manies, :table_belongs_to, :table_attribute_methods
 
-  def initialize(object)
-    @object = object
-  end
+    class << self
+      def inherited(klass)
+        klass.table_attributes = []
+        klass.table_has_manies = {}
+        klass.table_belongs_to = {}
+        klass.table_attribute_methods = {}
+      end
 
-  # @return [Hash]
-  def to_hash
-    hash = {}
+      def attributes(*args)
+        self.table_attributes.concat(args)
+      end
+    end
+
+
+    def initialize(object)
+      @object = object
+    end
+
+    # @return [Hash]
+    def to_hash
+      hash = {}
+      self.class.table_attributes.each do |key|
+        hash[key] = __get_value(key)
+      end
+
+      hash
+    end
   end
 end
