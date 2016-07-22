@@ -1,3 +1,8 @@
+if ENV['CI']
+  require 'coveralls'
+  Coveralls.wear!('rails')
+end
+
 require 'rspec-power_assert'
 
 require 'rebirth'
