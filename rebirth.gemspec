@@ -21,6 +21,7 @@ Gem::Specification.new do |spec|
 
   spec.add_runtime_dependency 'activesupport', '>= 4.0'
 
+
   spec.add_development_dependency "bundler", "~> 1.12"
   spec.add_development_dependency "rake", "~> 10.0"
   spec.add_development_dependency 'guard', '~> 2.14.0'
@@ -30,4 +31,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'pry_testcase', '~> 0.3.0'
   spec.add_development_dependency 'guard-bundler', '~> 2.1.0'
   spec.add_development_dependency 'coveralls', '~> 0.8.14'
+  spec.add_development_dependency 'rails', '>= 4.0'
 end

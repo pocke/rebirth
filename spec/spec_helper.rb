@@ -27,6 +27,7 @@ require 'rebirth'
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 
 
+SPEC_TMP_DPR = File.expand_path('../../tmp/', __FILE__)
 Dir[File.expand_path('../support/**/*.rb', __FILE__)].each { |f| require_relative f }
 
 RSpec.configure do |config|
