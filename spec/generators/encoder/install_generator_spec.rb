@@ -1,8 +1,8 @@
 require 'spec_helper'
-require 'generators/encoder/encoder_generator'
+require 'generators/encoder/install_generator'
 require 'ripper'
 
-describe Encoder::Generators::EncoderGenerator do
+describe Encoder::Generators::InstallGenerator do
   let(:test_case){Class.new(Rails::Generators::TestCase)}
   subject{test_case.new(:create_encoder_file).run_generator(arguments)}
   before do
@@ -30,25 +30,6 @@ describe Encoder::Generators::EncoderGenerator do
   context 'simple' do
     let(:arguments){%w[user]}
 
-    include_examples 'should_valid_as_a_ruby_script', 'app/encoders/user_encoder.rb'
-  end
-
-  context 'when has ApplicationEncoder' do
-    let(:arguments){%w[user]}
-    before do
-      class ApplicationEncoder; end
-    end
-
-    include_examples 'should_valid_as_a_ruby_script', 'app/encoders/user_encoder.rb'
-
-    it 'has ApplicationEncoder' do
-      subject
-      f = File.read(Pathname.new(SPEC_TMP_DPR)/'app/encoders/user_encoder.rb')
-      is_asserted_by{ f.include? 'class UserEncoder < ApplicationEncoder' }
-    end
-
-    after do
-      Object.__send__ :remove_const, :ApplicationEncoder
-    end
+    include_examples 'should_valid_as_a_ruby_script', 'app/encoders/application_encoder.rb'
   end
 end

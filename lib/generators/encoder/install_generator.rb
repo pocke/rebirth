@@ -4,7 +4,6 @@ module Encoder
   module Generators
     class InstallGenerator < Rails::Generators::Base
       source_root File.expand_path('../templates', __FILE__)
-      check_class_collision suffix: 'Encoder'
 
       def create_encoder_file
         template 'encoder.rb.erb', File.join('app/encoders', "application_encoder.rb")
@@ -15,6 +14,10 @@ module Encoder
 
       def parent_class_name
         'Rebirth::MethodBase'
+      end
+
+      def class_name
+        'ApplicationEncoder'
       end
     end
   end
