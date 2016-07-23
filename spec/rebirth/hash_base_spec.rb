@@ -10,6 +10,11 @@ describe Rebirth::HashBase do
         neko: 'nyan',
         inu: 'wan',
       },
+      poyos: [
+        {payo: 1, piyo: 3, peyo: 42},
+        {payo: 2, piyo: 5, peyo: 38},
+        {payo: 3, piyo: 7, peyo: 10},
+      ]
     }}
     subject{klass.new(object).to_hash}
 
