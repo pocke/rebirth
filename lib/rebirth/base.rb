@@ -23,6 +23,10 @@ module Rebirth
       def belongs_to(key, klass)
         self.table_belongs_to[key] = klass
       end
+
+      def has_many(key, klass)
+        self.table_has_manies[key] = klass
+      end
     end
 
 
@@ -36,8 +40,13 @@ module Rebirth
       self.class.table_attributes.each do |key|
         hash[key] = __get_value(key)
       end
+
       self.class.table_belongs_to.each do |key, klass|
         hash[key] = klass.new(__get_value(key)).to_hash
+      end
+
+      self.class.table_has_manies.each do |key, klass|
+        hash[key] = __get_value(key).map{|v| klass.new(v).to_hash}
       end
 
       hash
