@@ -80,4 +80,46 @@ RSpec.shared_context 'should_serialize' do
       is_asserted_by{ subject == expected}
     end
   end
+
+  context 'when specify an attribute_method by symbol' do
+    let(:klass) do
+      Class.new(described_class) do
+        attribute_method :bar, :upcased_bar
+
+        def upcased_bar
+          object[:bar].upcase
+        end
+      end
+    end
+
+    it  do
+      is_asserted_by{ subject == {bar: 'DEFG'} }
+    end
+  end
+
+  context 'when specify an attribute_method by lambda' do
+    let(:klass) do
+      Class.new(described_class) do
+        attribute_method :bar, -> (_self) { object[:bar].upcase }
+      end
+    end
+
+    it  do
+      is_asserted_by{ subject == {bar: 'DEFG'} }
+    end
+  end
+
+  context 'when specify an attribute_method by block' do
+    let(:klass) do
+      Class.new(described_class) do
+        attribute_method :bar do
+          object[:bar].upcase
+        end
+      end
+    end
+
+    it  do
+      is_asserted_by{ subject == {bar: 'DEFG'} }
+    end
+  end
 end

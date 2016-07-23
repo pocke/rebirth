@@ -27,6 +27,11 @@ module Rebirth
       def has_many(key, klass)
         self.table_has_manies[key] = klass
       end
+
+      def attribute_method(key, method = nil, &block)
+        # TODO: validate argument
+        self.table_attribute_methods[key] = method || block
+      end
     end
 
 
@@ -47,6 +52,15 @@ module Rebirth
 
       self.class.table_has_manies.each do |key, klass|
         hash[key] = __get_value(key).map{|v| klass.new(v).to_hash}
+      end
+
+      self.class.table_attribute_methods.each do |key, method|
+        hash[key] =
+          if method.respond_to?(:call)
+            instance_eval(&method)
+          else
+            __send__ method
+          end
       end
 
       hash
