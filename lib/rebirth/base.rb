@@ -55,11 +55,12 @@ module Rebirth
       end
 
       self.class.table_attribute_methods.each do |key, method|
-        if method.respond_to?(:call)
-          hash[key] = instance_eval(&method)
-        else
-          hash[key] = __send__ method
-        end
+        hash[key] =
+          if method.respond_to?(:call)
+            instance_eval(&method)
+          else
+            __send__ method
+          end
       end
 
       hash
