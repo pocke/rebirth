@@ -20,5 +20,39 @@ describe Rebirth::HashBase do
 
 
     include_context 'should_serialize'
+
+    context 'when object has cicular dependency' do
+      let(:object) do
+        parent = {
+          foo: 'abc',
+        }
+        child = {
+          hoge: 'fuga',
+          parent: parent,
+        }
+        parent[:children] = [child]
+
+        parent
+      end
+
+      let(:klass){
+        parent_encoder = Class.new(described_class) do
+          attributes :foo
+        end
+        child_encoder = Class.new(described_class) do
+          attributes :hoge
+          belongs_to :parent, parent_encoder
+        end
+        parent_encoder.class_eval do
+          has_many :children, child_encoder
+        end
+
+        parent_encoder
+      }
+
+      it  do
+        subject
+      end
+    end
   end
 end
