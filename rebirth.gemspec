@@ -32,4 +32,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'guard-bundler', '~> 2.1.0'
   spec.add_development_dependency 'coveralls', '~> 0.8.14'
   spec.add_development_dependency 'rails', '>= 4.0'
+  spec.add_development_dependency 'appraisal'
 end
