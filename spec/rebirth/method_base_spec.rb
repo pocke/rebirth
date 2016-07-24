@@ -4,7 +4,8 @@ describe Rebirth::MethoBase do
   describe '#to_hash' do
     let(:object){
       poyo_struct = Struct.new(:payo, :piyo, :peyo)
-      hoge = Struct.new(:neko, :inu).new('nyan', 'wan')
+      fuga = Struct.new(:cat, :dog).new('meow', 'bow')
+      hoge = Struct.new(:neko, :inu, :fuga).new('nyan', 'wan', fuga)
       poyos = [
         poyo_struct.new(1, 3, 42),
         poyo_struct.new(2, 5, 38),
@@ -41,7 +42,7 @@ describe Rebirth::MethoBase do
       }
 
       it  do
-        subject
+        is_asserted_by{ subject == {foo: 'abc', children: [{hoge: 'fuga'}]} }
       end
     end
   end

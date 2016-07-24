@@ -9,6 +9,10 @@ describe Rebirth::HashBase do
       hoge: {
         neko: 'nyan',
         inu: 'wan',
+        fuga: {
+          cat: 'meow',
+          dog: 'bow',
+        },
       },
       poyos: [
         {payo: 1, piyo: 3, peyo: 42},
@@ -51,7 +55,7 @@ describe Rebirth::HashBase do
       }
 
       it  do
-        subject
+        is_asserted_by{ subject == {foo: 'abc', children: [{hoge: 'fuga'}]} }
       end
     end
   end

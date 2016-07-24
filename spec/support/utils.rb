@@ -122,6 +122,43 @@ RSpec.shared_context 'should_serialize' do
       is_asserted_by{ subject == {bar: 'DEFG'} }
     end
   end
+
+  context 'when specify nested belongs_to' do
+    let(:klass) do
+      fuga_encoder = Class.new(described_class) do
+        attributes :cat
+      end
+
+      hoge_encoder = Class.new(described_class) do
+        attributes :neko
+        belongs_to :fuga, fuga_encoder
+      end
+
+      Class.new(described_class) do
+        attributes :foo
+        belongs_to :hoge, hoge_encoder
+      end
+    end
+
+    context 'when specify allow_nest' do
+
+      it do
+        is_asserted_by{ subject == {foo: 'abc', hoge: {neko: 'nyan'}} }
+      end
+    end
+
+    context 'when not specify allow_nest' do
+      before do
+        klass.class_eval do
+          allow_nest hoge: {fuga: true}
+        end
+      end
+
+      it do
+        is_asserted_by{ subject == {foo: 'abc', hoge: {neko: 'nyan', fuga: {cat: 'meow'}}} }
+      end
+    end
+  end
 end
 
 RSpec.shared_context 'with_generator', :with_generator do
