@@ -1,5 +1,6 @@
 # Rebirth
 
+[![Gem Version](https://badge.fury.io/rb/rebirth.svg)](https://badge.fury.io/rb/rebirth)
 [![Build Status](https://travis-ci.org/pocke/rebirth.svg?branch=master)](https://travis-ci.org/pocke/rebirth)
 [![Coverage Status](https://coveralls.io/repos/github/pocke/rebirth/badge.svg?branch=master)](https://coveralls.io/github/pocke/rebirth?branch=master)
 [![Stories in Ready](https://badge.waffle.io/pocke/rebirth.svg?label=ready&title=Ready)](http://waffle.io/pocke/rebirth)
