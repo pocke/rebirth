@@ -1,5 +1,5 @@
 module Rebirth
-  class MethoBase < Base
+  class MethodBase < Base
 
     private
 

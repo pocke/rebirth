@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Rebirth::MethoBase do
+describe Rebirth::MethodBase do
   describe '#to_hash' do
     let(:object){
       poyo_struct = Struct.new(:payo, :piyo, :peyo)
